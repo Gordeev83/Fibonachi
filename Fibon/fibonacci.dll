@@ -1,0 +1,29 @@
+using System;
+using System.Runtime.InteropServices;
+
+class Program
+{
+    [DllImport("fibonacci.dll")]
+    public static extern void fibonacci_init(ulong a, ulong b);
+
+    [DllImport("fibonacci.dll")]
+    public static extern bool fibonacci_next();
+
+    [DllImport("fibonacci.dll")]
+    public static extern ulong fibonacci_current();
+
+    [DllImport("fibonacci.dll")]
+    public static extern uint fibonacci_index();
+
+    static void Main()
+    {
+        ulong a = 1, b = 1;
+        fibonacci_init(a, b);
+
+        for (int i = 0; i < 10; i++)
+        {
+            Console.WriteLine($"Index: {fibonacci_index()}, Value: {fibonacci_current()}");
+            fibonacci_next();
+        }
+    }
+}
